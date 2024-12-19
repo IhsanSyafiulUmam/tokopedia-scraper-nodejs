@@ -1,0 +1,22 @@
+{
+  "name": "tokopedia-scraper-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:scraping": "node index.js",
+    "start:product-saver": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.5",
+    "axios": "^1.7.9",
+    "dotenv": "^16.0.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "mongoose": "^8.9.1",
+    "nodemon": "^3.1.9",
+    "winston": "^3.8.1"
+  }
+}
