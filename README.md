@@ -1,6 +1,6 @@
 # Tokopedia Scraper Node.js
 
-This project is a web scraper for Tokopedia, built using Node.js. It allows you to extract product information from Tokopedia.
+This project is a web scraper for Tokopedia, built using Node.js. It allows you to extract product information from Tokopedia. This project utilizes the Tokopedia GraphQL 
 
 ## Features
 
@@ -13,16 +13,22 @@ This project is a web scraper for Tokopedia, built using Node.js. It allows you 
 - Resume scraping from the last saved state (last_cursor and page) stored locally in `state.json` to prevent restarting from the beginning after an interruption.
 - Utilize Tokopedia's GraphQL API for faster and more sustainable scraping compared to scraping based on HTML structure.
 
+## Need To Implement
+- Add resedential proxy support
+. It would be better to implement proxy support using residential proxies specifically from Indonesia. This will enhance the prevention of IP blocks and rate limits due to continuous requests to Tokopedia's GraphQL API. By using residential proxies, we can distribute the IPs used for requests from various regions in Indonesia.
+
 ## Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
+- MongoDB (v7 or higher)
+- RabbitMQ (v3 or higher)
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/tokopedia-scraper-nodejs.git
+    git clone https://github.com/IhsanSyafiulUmam/tokopedia-scraper-nodejs.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -37,9 +43,15 @@ This project is a web scraper for Tokopedia, built using Node.js. It allows you 
 
 The `config.js` file contains the following settings:
 
-- `BASE_URL`: The base URL of Tokopedia.
-- `SEARCH_QUERY`: The search query for the products you want to scrape.
-- `MAX_PAGES`: The maximum number of pages to scrape.
+- `SCRAPING.MAX_RETRIES`: The maximum number of retry attempts for failed requests.
+- `SCRAPING.RETRY_DELAY`: The delay (in milliseconds) between retry attempts.
+- `SCRAPING.PAGE_DELAY`: The delay (in milliseconds) between scraping pages.
+- `RATE_LIMITING.MAX_REQUESTS_PER_MINUTE`: The maximum number of requests allowed per minute to avoid rate limiting.
+- `RATE_LIMITING.CONCURRENT_REQUESTS`: The number of concurrent requests allowed.
+- `MONGODB.URI`: The MongoDB URI for connecting to the database.
+- `RABBITMQ.URL`: The RabbitMQ URL for connecting to the message broker.
+- `LOGGING.LEVEL`: The logging level (e.g., 'info', 'debug').
+- `LOGGING.FILE_PATH`: The file path for saving log files.
 
 ## Running the Project
 
