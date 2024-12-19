@@ -2,6 +2,14 @@
 
 This project is a web scraper for Tokopedia, built using Node.js. It allows you to extract product information from Tokopedia. This project utilizes the Tokopedia GraphQL 
 
+## Demo
+
+For a detailed demonstration of how this project works, you can watch the following video:
+
+[![alt text](image.png)](https://www.tella.tv/video/scraping-data-woes-7zgo)
+
+This video provides an overview of the project's features, setup, and usage, including a step-by-step guide on how to scrape product data from Tokopedia using this Node.js scraper.
+
 ## Features
 
 - Scrape product details such as name, price, and rating based on category.
@@ -15,7 +23,7 @@ This project is a web scraper for Tokopedia, built using Node.js. It allows you 
 
 ## Need To Implement
 - Add resedential proxy support
-. It would be better to implement proxy support using residential proxies specifically from Indonesia. This will enhance the prevention of IP blocks and rate limits due to continuous requests to Tokopedia's GraphQL API. By using residential proxies, we can distribute the IPs used for requests from various regions in Indonesia.
+It would be better to implement proxy support using residential proxies specifically from Indonesia. This will enhance the prevention of IP blocks and rate limits due to continuous requests to Tokopedia's GraphQL API. By using residential proxies, we can distribute the IPs used for requests from various regions in Indonesia.
 
 ## Prerequisites
 
@@ -23,6 +31,7 @@ This project is a web scraper for Tokopedia, built using Node.js. It allows you 
 - npm (v6 or higher)
 - MongoDB (v7 or higher)
 - RabbitMQ (v3 or higher)
+- Docker (optional)
 
 ## Installation
 
@@ -69,6 +78,30 @@ To run the project, follow these steps:
     ```bash
     npm run dev:start-scraping
     ```
+3. The exported CSV file will be available in the `/output/tokopedia_{category}_products_{timestamp}.csv`.
+
+4. If an interruption occurs during scraping, such as hitting the platform's rate limit, you can resume scraping by running:
+    ```bash
+    npm run dev:start-scraping
+    ```
+    The scraper will automatically continue from the last saved state. If you want to start scraping from the beginning, delete the `state.json` file. Note that the exported CSV will only contain data from the last saved state. For a complete CSV export, you can export the data from the MongoDB products collection.
+
+## Deployment
+
+You can deploy the project using Docker and Docker Compose. The repository includes a `Dockerfile`, `docker-compose.yml`, and `Makefile` to simplify the deployment process.
+
+### Using Docker
+
+1. Build the Docker image:
+    ```bash
+    make dc-build
+    ```
+
+2. Run the Docker container:
+    ```bash
+    make dc-run
+    ```
+These commands will build the Docker image, start the necessary services, and ensure the application is running in a containerized environment.
 
 The product saver service must be running before you start the scraper to ensure that the scraped data is saved correctly.
 

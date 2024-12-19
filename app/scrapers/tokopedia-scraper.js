@@ -231,7 +231,7 @@ class TokopediaScraper {
             await fs.mkdir('output', { recursive: true });
 
             const csv = parse(csvData);
-            const filename = `output/tokopedia_${this.category.replace(' ', '_')}_products_${Date.now()}.csv`;
+            const filename = `output/tokopedia_${this.category.replace(' ', '_')}_products_${csvData.length}_${Date.now()}.csv`;
             
             await fs.writeFile(filename, csv, 'utf-8');
             

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  product_saver:
+    image: tokopedia-scraper:latest
+    network_mode: host
+    env_file:
+      - .env
+    restart: unless-stopped
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+        max-file: "2"
+    command: ["node", "app/services/product-saver.js"]
+  
+  scraper:
+    image: tokopedia-scraper:latest
+    network_mode: host
+    env_file:
+      - .env
+    restart: unless-stopped
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+        max-file: "2"
+    command: ["node", "index.js"]
+
+ 
