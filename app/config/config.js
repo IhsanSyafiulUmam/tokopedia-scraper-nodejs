@@ -9,10 +9,10 @@ module.exports = {
         CONCURRENT_REQUESTS: 3,
     },
     MONGODB: {
-        URI: 'mongodb://localhost:27017/tokopedia', 
+        URI: 'mongodb://127.0.0.1:26500/tokopedia', 
     },
     RABBITMQ: {
-        URL: 'amqp://localhost',
+        URL: 'amqp://guest:guest@127.0.0.1:5566',
     },
     LOGGING: {
         LEVEL: 'info',

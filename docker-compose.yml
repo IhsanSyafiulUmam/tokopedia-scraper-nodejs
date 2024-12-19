@@ -1,30 +1,49 @@
 version: '3.8'
 
 services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5566:5672"  
+      - "15566:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "26500:27017" 
+    volumes:
+      - mongo_data:/data/db  
+
   product_saver:
     image: tokopedia-scraper:latest
     network_mode: host
-    env_file:
-      - .env
     restart: unless-stopped
     logging:
       driver: local
       options:
         max-size: 10m
         max-file: "2"
+    depends_on:
+      - rabbitmq
+      - mongodb
     command: ["node", "app/services/product-saver.js"]
   
   scraper:
     image: tokopedia-scraper:latest
     network_mode: host
-    env_file:
-      - .env
     restart: unless-stopped
     logging:
       driver: local
       options:
         max-size: 10m
         max-file: "2"
+    depends_on:
+      - rabbitmq
+      - mongodb
     command: ["node", "index.js"]
 
- 
+volumes:
+  mongo_data:  
